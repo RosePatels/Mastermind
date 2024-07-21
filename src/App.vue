@@ -1,8 +1,10 @@
-<script setup></script>
-
 <template>
-  <div>nom nom</div>
+  <Board></Board>
 </template>
+
+<script setup>
+import Board from "@/components/Board.vue";
+</script>
 
 <style scoped>
 
