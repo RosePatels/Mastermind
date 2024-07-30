@@ -1,5 +1,6 @@
 <template>
-  <Board></Board>
+  <Board>
+  </Board>
 </template>
 
 <script setup>
