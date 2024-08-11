@@ -17,8 +17,8 @@ const props = defineProps({
 const colorMap = ref({
     'R': "#FA9189",
     'O': "#FCAE7C",
-    "DY": "#FFE699",
-    "LY": "#F9FFB5",
+    "DY": "#ffd860",
+    "LY": "#fff827",
     "G": "#B3F5BC",
     "B": "#D6F6FF",
     "Pu": "#E2CBF7",
