@@ -16,10 +16,16 @@ export const useBoardStore = defineStore('board', () => {
     ['W', 'W', 'W', 'W'],
   ]);
 
+  const insertPegLocation = ref({
+    row: 9,
+    peg: 0
+  })
+
   const selectionPegs = ref(['R', 'O', "DY", 'LY', "G", 'B', "Pu", 'Li']);
 
   return {
     selectionPegs,
-    board
+    board,
+    insertPegLocation
   }
 })

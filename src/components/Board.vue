@@ -8,7 +8,7 @@
     </div>
     <div class="selection-pegs-container">
         <div v-for="colorCode of boardStore.selectionPegs" :key="colorCode" class="selection-peg">
-            <Peg :colorCode="colorCode" />
+            <Peg :colorCode="colorCode" @click="selectPeg(colorCode)"/>
         </div>
     </div>
 </template>
@@ -17,6 +17,21 @@
 import Peg from "./Peg.vue";
 import { useBoardStore } from "@/store/BoardStore";
 const boardStore = useBoardStore();
+
+const selectPeg = (colorCode) => {
+    console.log(colorCode);
+    boardStore.board[boardStore.insertPegLocation.row][boardStore.insertPegLocation.peg] = colorCode;
+    updateInsertPegLocation();
+}
+
+const updateInsertPegLocation = () => {
+    if(boardStore.insertPegLocation.peg >= 3) {
+        boardStore.insertPegLocation.row -= 1;
+        boardStore.insertPegLocation.peg = 0;
+    } else {
+        boardStore.insertPegLocation.peg += 1;
+    }
+}
 
 </script>
 
