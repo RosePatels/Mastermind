@@ -18,7 +18,25 @@ export const useBoardStore = defineStore('board', () => {
     ['W', 'W', 'W', 'W'],
   ]);
 
+  const keyPegBoard = ref([
+    ['B', 'R', 'B', 'R'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'W']
+  ]);
+
   const insertPegLocation = ref({
+    row: 9,
+    peg: 0
+  })
+
+  const keyPegLocation = ref({
     row: 9,
     peg: 0
   })
@@ -44,6 +62,8 @@ export const useBoardStore = defineStore('board', () => {
     board,
     insertPegLocation,
     secretCode,
-    colorMap
+    colorMap,
+    keyPegBoard,
+    keyPegLocation
   }
 })

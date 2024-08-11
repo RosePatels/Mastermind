@@ -1,8 +1,13 @@
 <template>
     <div class="mastermind-board-container">
         <div v-for="(row, index) of boardStore.board" :key="index" class="row-container">
+            <!-- Code Pegs -->
             <div v-for="(colorCode, idx) of row" :key="`${index} ${idx}`">
                 <Peg :colorCode="colorCode" class="row-peg" />
+            </div>
+            <!-- Key Pegs -->
+            <div v-for="(colorCode, idx) of boardStore.keyPegBoard[index]" :key="`${index} ${idx}`">
+                <Peg :colorCode="colorCode" />
             </div>
         </div>
     </div>
@@ -10,6 +15,8 @@
         <div v-for="colorCode of boardStore.selectionPegs" :key="colorCode" class="selection-peg">
             <Peg :colorCode="colorCode" @click="selectPeg(colorCode)"/>
         </div>
+        <button>Undo</button>
+        <button @click="checkRow">Check</button>
     </div>
 </template>
 
@@ -28,7 +35,6 @@ const generateSecretCode = () => {
         boardStore.secretCode[i] = Object.keys(boardStore.colorMap)[getRandomIntInclusive(0, 7)];
     }
     console.log(boardStore.secretCode);
-    debugger;
 }
 
 //MDN Math.random();
@@ -44,12 +50,32 @@ const selectPeg = (colorCode) => {
 }
 
 const updateInsertPegLocation = () => {
-    if(boardStore.insertPegLocation.peg >= 3) {
-        boardStore.insertPegLocation.row -= 1;
-        boardStore.insertPegLocation.peg = 0;
-    } else {
+    if(boardStore.insertPegLocation.peg < 3) {
         boardStore.insertPegLocation.peg += 1;
     }
+}
+
+const checkRow = () => {
+    for(let i = 0; i < 4; i++) {
+        let current = boardStore.board[boardStore.insertPegLocation.row][i];
+        if(current === boardStore.secretCode[i]) {
+            //update keyPegBoard with green peg
+            boardStore.keyPegBoard[boardStore.keyPegLocation.row][boardStore.keyPegLocation.peg] = 'G';
+            boardStore.keyPegLocation.peg += 1;
+        } else if(boardStore.secretCode.includes(current)) {
+            //update keyPegBoard with yellow peg;
+            boardStore.keyPegBoard[boardStore.keyPegLocation.row][boardStore.keyPegLocation.peg] = 'LY';
+            boardStore.keyPegLocation.peg += 1;
+        }
+    }
+    updateNewRowLocation();
+}
+
+const updateNewRowLocation = () => {
+    boardStore.keyPegLocation.row -= 1;
+    boardStore.keyPegLocation.peg = 0;
+    boardStore.insertPegLocation.row -= 1;
+    boardStore.insertPegLocation.peg = 0;
 }
 
 </script>
