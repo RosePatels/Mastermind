@@ -1,10 +1,14 @@
 <template>
-    <div class="peg" :style="{ 'background-color': colorMap[colorCode] }">
+    <div class="peg" :style="{ 'background-color': boardStore.colorMap[colorCode] }">
     </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import {  useBoardStore } from "@/store/BoardStore";
+
+const boardStore = useBoardStore();
+
 
 const props = defineProps({
     colorCode: {
@@ -13,19 +17,6 @@ const props = defineProps({
     }
 });
 
-//Colors from PastelColorPalettes
-const colorMap = ref({
-    'R': "#FA9189",
-    'O': "#FCAE7C",
-    "DY": "#ffd860",
-    "LY": "#fff827",
-    "G": "#B3F5BC",
-    "B": "#D6F6FF",
-    "Pu": "#E2CBF7",
-    "Li": "#D1BDFF",
-    "W": "#FFFFFF",
-    "Bk": "#000000"
-});
 
 </script>
 

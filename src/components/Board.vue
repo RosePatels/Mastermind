@@ -14,12 +14,31 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import Peg from "./Peg.vue";
 import { useBoardStore } from "@/store/BoardStore";
 const boardStore = useBoardStore();
 
+onMounted(() => {
+    generateSecretCode();
+})
+
+const generateSecretCode = () => {
+    for(let i = 0; i < 4; i++) {
+        boardStore.secretCode[i] = Object.keys(boardStore.colorMap)[getRandomIntInclusive(0, 7)];
+    }
+    console.log(boardStore.secretCode);
+    debugger;
+}
+
+//MDN Math.random();
+const getRandomIntInclusive = (min, max) => {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
+
 const selectPeg = (colorCode) => {
-    console.log(colorCode);
     boardStore.board[boardStore.insertPegLocation.row][boardStore.insertPegLocation.peg] = colorCode;
     updateInsertPegLocation();
 }
