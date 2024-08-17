@@ -22,8 +22,8 @@ const props = defineProps({
 
 <style scoped>
 .peg {
-    width: 50px;
-    height: 50px;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background: #000000;
 }

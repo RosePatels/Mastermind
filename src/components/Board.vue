@@ -15,7 +15,7 @@
         <div v-for="colorCode of boardStore.selectionPegs" :key="colorCode" class="selection-peg">
             <Peg :colorCode="colorCode" @click="selectPeg(colorCode)"/>
         </div>
-        <button>Undo</button>
+        <button @click="undoPeg">Undo</button>
         <button @click="checkRow">Check</button>
     </div>
 </template>
@@ -76,6 +76,13 @@ const updateNewRowLocation = () => {
     boardStore.keyPegLocation.peg = 0;
     boardStore.insertPegLocation.row -= 1;
     boardStore.insertPegLocation.peg = 0;
+}
+
+const undoPeg = () => {
+    boardStore.board[boardStore.insertPegLocation.row][boardStore.insertPegLocation.peg] = 'W';
+    if(boardStore.insertPegLocation.peg > 0) {
+        boardStore.insertPegLocation.peg -= 1;
+    }
 }
 
 </script>

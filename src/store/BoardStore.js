@@ -19,7 +19,7 @@ export const useBoardStore = defineStore('board', () => {
   ]);
 
   const keyPegBoard = ref([
-    ['B', 'R', 'B', 'R'],
+    ['W', 'W', 'W', 'W'],
     ['W', 'W', 'W', 'W'],
     ['W', 'W', 'W', 'W'],
     ['W', 'W', 'W', 'W'],
