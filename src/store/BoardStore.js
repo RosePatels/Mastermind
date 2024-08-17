@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 export const useBoardStore = defineStore('board', () => {
 
+  const screenState = ref("Start");
   const secretCode = ref([]);
 
   const board = ref([
@@ -57,6 +58,39 @@ export const useBoardStore = defineStore('board', () => {
     "Bk": "#000000"
   });
 
+  const initializeNewGame = () => {
+    board.value = [
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+    ];
+
+    keyPegBoard.value = [
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W'],
+      ['W', 'W', 'W', 'W']
+    ];
+
+    insertPegLocation.value.row = 9;
+    insertPegLocation.value.peg = 0;
+    keyPegLocation.value.row = 9;
+    keyPegLocation.value.peg = 0;
+  }
+
   return {
     selectionPegs,
     board,
@@ -64,6 +98,8 @@ export const useBoardStore = defineStore('board', () => {
     secretCode,
     colorMap,
     keyPegBoard,
-    keyPegLocation
+    keyPegLocation,
+    screenState,
+    initializeNewGame
   }
 })

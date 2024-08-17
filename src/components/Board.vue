@@ -68,7 +68,17 @@ const checkRow = () => {
             boardStore.keyPegLocation.peg += 1;
         }
     }
+    checkEndGame();
     updateNewRowLocation();
+}
+
+
+const checkEndGame = () => {
+    if(boardStore.keyPegBoard[boardStore.keyPegLocation.row].every(peg => peg === 'G')) {
+        boardStore.screenState = 'Victory';
+    } else if(boardStore.insertPegLocation.row === 0) {
+        boardStore.screenState = 'Defeat';
+    }
 }
 
 const updateNewRowLocation = () => {
