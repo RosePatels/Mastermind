@@ -2,7 +2,7 @@
   <div class="main">
     <div class="game-container rubik-mono-one-regular">
       <StartScreen v-if="boardStore.screenState === 'Start'" />
-      <InstructionsScreen v-if="boardStore.screenState === 'Instructions'" />
+      <InstructionsScreen v-else-if="boardStore.screenState === 'Instructions'" />
       <SettingsScreen v-else-if="boardStore.screenState === 'Settings'" />
       <Board v-else-if="boardStore.screenState === 'In Game'" />
       <EndGameScreen v-else-if="boardStore.screenState === 'Victory' || boardStore.screenState === 'Defeat'" />
@@ -44,6 +44,6 @@ const boardStore = useBoardStore();
 }
 
 .main {
-  background: #fefbea;
+  background: #FFFDD0;
 }
 </style>

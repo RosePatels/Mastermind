@@ -25,6 +25,7 @@ h2 {
     font-size: 2.5em;
     padding-bottom: 1em;
     color: #042297;
+		text-shadow: 3px 3px 5px #bfbfbf;
 }
 
 button {
@@ -43,6 +44,7 @@ button {
 	font-style: normal;
 	border-radius: 5px;
 	letter-spacing: 1px;
+	box-shadow: 3px 3px 10px #bfbfbf;
 }
 
 button:hover {

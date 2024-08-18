@@ -6,17 +6,23 @@
                 <Peg :colorCode="colorCode" class="row-peg" />
             </div>
             <!-- Key Pegs -->
-            <div v-for="(colorCode, idx) of boardStore.keyPegBoard[index]" :key="`${index} ${idx}`">
-                <Peg :colorCode="colorCode" :selectionPeg="true"/>
+            <div class="key-pegs-container">
+                <div v-for="(colorCode, idx) of boardStore.keyPegBoard[index]" :key="`${index} ${idx}`">
+                    <Peg :colorCode="colorCode" :keyPeg="true"/>
+                </div>
             </div>
         </div>
     </div>
-    <div class="selection-pegs-container">
-        <div v-for="colorCode of boardStore.selectionPegs" :key="colorCode" class="selection-peg">
-            <Peg :colorCode="colorCode" @click="selectPeg(colorCode)"/>
+    <div class="user-actions-container">
+        <div class="selection-pegs-container">
+            <div v-for="colorCode of boardStore.selectionPegs" :key="colorCode" class="selection-peg">
+                <Peg :colorCode="colorCode" @click="selectPeg(colorCode)" class="select-peg"/>
+            </div>
         </div>
-        <button @click="undoPeg">Undo</button>
-        <button @click="checkRow">Check</button>
+        <div class="user-buttons-container">
+            <button @click="undoPeg">Undo</button>
+            <button @click="checkRow">Check</button>
+        </div>
     </div>
 </template>
 
@@ -64,7 +70,7 @@ const checkRow = () => {
             boardStore.keyPegLocation.peg += 1;
         } else if(boardStore.secretCode.includes(current)) {
             //update keyPegBoard with yellow peg;
-            boardStore.keyPegBoard[boardStore.keyPegLocation.row][boardStore.keyPegLocation.peg] = 'LY';
+            boardStore.keyPegBoard[boardStore.keyPegLocation.row][boardStore.keyPegLocation.peg] = 'DY';
             boardStore.keyPegLocation.peg += 1;
         }
     }
@@ -100,6 +106,7 @@ const undoPeg = () => {
 <style scoped>
 .row-container {
     display: flex;
+    padding: 2px 0;
 }
 
 .row-peg {
@@ -107,11 +114,57 @@ const undoPeg = () => {
     border: 2px solid #525252;
 }
 
-.selection-pegs-container {
+.key-pegs-container {
+    display: grid;
+    grid-template-columns: 30px 30px;
+    align-items: center;
+}
+
+.user-actions-container {
     display: flex;
+    justify-content: space-between;
+}
+
+.selection-pegs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-grow: 1;
 }
 
 .selection-peg {
-    margin: 5px 15px;
+    display: grid;
+    margin: 5px 10px;
+    cursor: pointer;
 }
+
+.user-buttons-container {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    justify-content: center;
+}
+
+button {
+    background-color: #26bee9;
+    border: none;
+    color: #D6F6FF;
+    padding: 8px 0px;
+    text-align: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 200ms;
+    margin: 5px 0;
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 10px #bfbfbf;
+}
+
+button:hover {
+  background: #042297;
+	color: #fff827;
+}
+
 </style>

@@ -48,12 +48,12 @@ export const useBoardStore = defineStore('board', () => {
   const colorMap = ref({
     'R': "#FA9189",
     'O': "#FCAE7C",
-    "DY": "#ffd860",
-    "LY": "#fff827",
-    "G": "#B3F5BC",
-    "B": "#D6F6FF",
-    "Pu": "#E2CBF7",
-    "Pi": "#ffbef0",
+    "DY": "#ffcc31",
+    "LY": "#fff707",
+    "G": "#7cf38c",
+    "B": "#adedff",
+    "Pu": "#dcbdf8",
+    "Pi": "#fbabe8",
     "W": "#FFFFFF",
     "Bk": "#000000"
   });
