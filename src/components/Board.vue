@@ -7,7 +7,7 @@
             </div>
             <!-- Key Pegs -->
             <div v-for="(colorCode, idx) of boardStore.keyPegBoard[index]" :key="`${index} ${idx}`">
-                <Peg :colorCode="colorCode" />
+                <Peg :colorCode="colorCode" :selectionPeg="true"/>
             </div>
         </div>
     </div>

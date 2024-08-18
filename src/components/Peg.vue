@@ -1,5 +1,5 @@
 <template>
-    <div class="peg" :style="{ 'background-color': boardStore.colorMap[colorCode] }">
+    <div :style="{ 'background-color': selectionPeg && colorCode === 'W' ? 'rgb(138 138 138)' :  boardStore.colorMap[colorCode] }" :class="{ 'peg': !selectionPeg, 'selection-peg': selectionPeg }">
     </div>
 </template>
 
@@ -14,6 +14,10 @@ const props = defineProps({
     colorCode: {
         type: String,
         default: 'W'
+    },
+    selectionPeg: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -26,5 +30,11 @@ const props = defineProps({
     height: 2rem;
     border-radius: 50%;
     background: #000000;
+}
+
+.selection-peg {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
 }
 </style>
