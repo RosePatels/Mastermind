@@ -120,6 +120,12 @@ const undoPeg = () => {
     align-items: center;
 }
 
+.key-pegs-container {
+    display: flex;
+    justify-content: center;
+
+}
+
 .user-actions-container {
     display: flex;
     justify-content: space-between;
