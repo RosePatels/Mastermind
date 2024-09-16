@@ -24,10 +24,13 @@
             <button @click="checkRow">Check</button>
         </div>
     </div>
+    <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import Peg from "./Peg.vue";
 import { useBoardStore } from "@/store/BoardStore";
 const boardStore = useBoardStore();
@@ -35,6 +38,8 @@ const boardStore = useBoardStore();
 onMounted(() => {
     generateSecretCode();
 })
+
+const errorMessage = ref(null);
 
 const generateSecretCode = () => {
     for(let i = 0; i < 4; i++) {
@@ -62,6 +67,11 @@ const updateInsertPegLocation = () => {
 }
 
 const checkRow = () => {
+    errorMessage.value = null;
+    if(boardStore.board[boardStore.insertPegLocation.row].includes('W')) {
+        errorMessage.value = "Error: row needs to be full";
+        return;
+    }
     for(let i = 0; i < 4; i++) {
         let current = boardStore.board[boardStore.insertPegLocation.row][i];
         if(current === boardStore.secretCode[i]) {
@@ -171,6 +181,16 @@ button {
 button:hover {
   background: #042297;
 	color: #fff827;
+}
+
+.error-message {
+    color: #db2d2d;
+    font-size: 12px;
+    padding: 10px;
+    position: absolute;
+    background: #ff737369;
+    right: 15px;
+    top: 15px;
 }
 
 </style>

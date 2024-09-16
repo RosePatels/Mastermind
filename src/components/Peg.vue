@@ -4,7 +4,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import {  useBoardStore } from "@/store/BoardStore";
 
 const boardStore = useBoardStore();
