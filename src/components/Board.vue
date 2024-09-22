@@ -43,7 +43,7 @@ const errorMessage = ref(null);
 
 const generateSecretCode = () => {
     for(let i = 0; i < 4; i++) {
-        boardStore.secretCode[i] = Object.keys(boardStore.colorMap)[getRandomIntInclusive(0, 7)];
+        boardStore.secretCode[i] = getSecretCodePeg();
     }
     console.log(boardStore.secretCode);
 }
@@ -55,7 +55,23 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
 }
 
+const getSecretCodePeg = () => {
+    let newPeg = Object.keys(boardStore.colorMap)[getRandomIntInclusive(0, 7)];
+    //ensure secret code does not have duplicate pegs
+    while(boardStore.secretCode.includes(newPeg)) {
+        newPeg = Object.keys(boardStore.colorMap)[getRandomIntInclusive(0, 7)];
+        console.log(newPeg);
+    }
+    return newPeg;
+}
+
 const selectPeg = (colorCode) => {
+    errorMessage.value = null;
+    if(boardStore.board[boardStore.insertPegLocation.row].includes(colorCode)) {
+        errorMessage.value = "Color already chosen";
+        return;
+    }
+
     boardStore.board[boardStore.insertPegLocation.row][boardStore.insertPegLocation.peg] = colorCode;
     updateInsertPegLocation();
 }
